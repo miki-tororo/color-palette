@@ -2,9 +2,26 @@ import tkinter as tk
 import tkinter.font as font
 import shelve as sh
 
+class Useful_panel():
+    def useful_panel(self,src)
+    
+    def put_color(self):
+        #put color_code
+    
 
 
 root = tk.Tk()
+
+#font
+my_font = font.Font(root,family="游ゴシック",size=12,weight="bold")
+
+#set display
+root.title("MyGuiApp")
+root.geometry("800x500")
+root.configure(bg='#113311')
+
+
+
 
 """
 
