@@ -11,6 +11,7 @@ var=tk.IntVar()                 #ラジオボタンのチェックの有無の�
 var.set(0)                      #ラジオボタンのチェックの初期値　valure=0(一つ目)に設定
 
 color="#ffffff"                 #色指定の変数
+colorList = ['#ffffff','#000080','#ffff00']
 
 radioList=[]
 entryList=[]
@@ -98,10 +99,15 @@ def AddColor(color):         #カラーホルダーの生成（①ラジオボ�
 
 #デフォルトで3色を設置
 for num in range (3):
-    AddColor(color)
+    AddColor(colorList[num])
     radioList[num].place(x=a,y=b*(1+num))
     entryList[num].place(x=a*1.8, y=b*(1+num))
     labelList[num].place(x=a*2.8, y=b*(1+num))
+
+
+#指定された3色をカラーフォルダに表示する
+
+
 
     
 
@@ -182,6 +188,7 @@ def Preview():
                      font=("MSゴシック", "80", "bold"))
 
 #entryList[3].
+Preview()
     
 ColorHolder.mainloop()
 
