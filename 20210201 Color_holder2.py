@@ -1,4 +1,3 @@
-#test
 import tkinter as tk
 
 ColorHolder = tk.Tk()
@@ -174,12 +173,16 @@ print(num)
 
 
 #プレビュー画面  
-#def Previwe(color):
+def Preview():
+    canvasPreview = tk.Canvas(width=900, height=450,bg="#000000")
+    canvasPreview.place(x=a, y=b*(2+num))
+    canvasPreview.create_rectangle(0,0,450,450, fill="blue")
+    canvasPreview.create_rectangle(450,0,900,450, fill="yellow")
+    canvasPreview.create_text(450,220,text="Sample", fill= 'red',
+                     font=("MSゴシック", "80", "bold"))
 
-
-
- 
-
+#entryList[3].
+    
 ColorHolder.mainloop()
 
  
