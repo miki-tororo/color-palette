@@ -43,6 +43,7 @@ WebEntry.place(x=a*10, y=0.8*b)
 
 #画面遷移ボタン(Sellection)の処理
 def transition_button1(home):
+    test=tk.Toplevel()
     home.place_forget()                                          #canvas1(home)を隠す
     canvas2 =tk.Canvas(background="#eca",width=500,height=400)   #セレクション画面の設定
     canvas2.place(x=a*4.5,y=0)
@@ -80,7 +81,7 @@ def transition_button4(palette):
 
 
 
-                             
+"""                             
 def AddColor(color):         #カラーホルダーの生成（①ラジオボタン、②エントリーボックス、③ラベル）
     #ラジオボタン
     radio =tk.Radiobutton(ColorHolder, value=num, variable=var,text="color"+str(num+1))
@@ -93,9 +94,39 @@ def AddColor(color):         #カラーホルダーの生成（①ラジオボ�
     #ラベル
     label=tk.Label(width = 4,height = 2,relief = "groove",background =color)
     labelList.append(label)   
+"""
+
+def AddColor(color):         #カラーホルダーの生成（①ラジオボタン、②エントリーボックス、③ラベル）
+    #ラジオボタン
+    radio =tk.Radiobutton(ColorHolder, variable=var)
+    radioList.append(radio)   
+    radio.place
+   
+    #エントリーボックス
+    entry = tk.Entry(width = 13,background = '#ffffff',foreground = '#000000')
+    entryList.append(entry)
+
+    #ラベル
+    label=tk.Label(width = 4,height = 2,relief = "groove",background =color)
+    labelList.append(label)
+
+    num=radioList.length()
+    
+    
+    AddColor(color)
+    
+    radioList[num].place(x=a,y=b*(1+num))
+    entryList[num].place(x=a*1.8, y=b*(1+num))
+    labelList[num].place(x=a*2.8, y=b*(1+num))
+    
+    Create_delBtn()
+    delList[num].place(x=a*3.3, y=b*(1+num))    
+    print(len(radioList))
+    print(num)
 
 
    
+
 
 #デフォルトで3色を設置
 for num in range (3):
@@ -106,30 +137,67 @@ for num in range (3):
     labelList[num].place(x=a*2.8, y=b*(1+num))
 
 
+
+
+
+
 #エンターキーを押したときに実行する処理
 #       処理①ラベル3個の色をEntに入力されたカラーコードに変更する。
 #       処理②プレビュー画面２つの色をEntに入力されたカラーコードに変更する。
 #       処理③例外処理
 
+#変数i:エンターキーが押されたエントリーボックスのインデックス番号
+
+def colorChange0(event):
+    try:
+        labelList[0].config(bg= entryList[0].get())
+        canvas1.configure(id0,fg = entryList[0].get())
+  
+        
+    except tk.TclError:
+        error=0
+
+entryList[0].bind("<Return>",colorChange0)
+
+
+
 """
+    canvasPreview.create_rectangle(0,0,450,450, fill=entryList[1].get())
+    canvasPreview.create_rectangle(450,0,900,450, fill=entryList[2].get())
+
+
+
+
 def colorChange(event):
     try:
-        labelList[inIndex].config(bg= entryList[inIndex].get())
+        labelList[i].config(bg= entryList[i].get())
     except tkinter.TclError:
         error=0
-        
+
+
 
 
 
 #☆②イベントの処理の設定
 #    エンターキーが押されたときにラベルの色を変更
 
-#入力されたエントリーボックスのインデックス「inIndex」を探す
+#入力されたエントリーボックスのインデックス「i」を探す
 
-print(entryList[inIndex])
-entryList[inIndex].bind("<Return>",colorChange) 
-    
-"""
+
+for index in range (num+1):
+    if entryList[i].get() != entryList[index].get():
+        print(index)
+        i=index
+        print(entryList[i].get())
+        entryList[i].bind("<Return>",colorChange)
+        print("ラベルの色変更")
+
+    else:
+        print(index)
+        print(entryList[index].get())
+        print("変更なし")
+""" 
+
 
 
     
@@ -138,7 +206,7 @@ entryList[inIndex].bind("<Return>",colorChange)
 
 #削除ボタンの処理
 def DelBtn_click():
-    global num
+    
     #delList
     radioList[2].destroy()  #delボタンが押されたところのnumのradioボタンを消す
     entryList[2].destroy()  #delボタンが押されたところの配列のindexを取得したい
@@ -174,14 +242,11 @@ for i in range(len(radioList)):
     delList[i].place(x=a*3.3, y=b*(1+i))
 
     
-
-
-
-#カラー追加ボタンで色を追加　　
-def AddBtn_click():
+def AddColor(color):
     global num
     num += 1
     AddColor(color)
+    
     radioList[num].place(x=a,y=b*(1+num))
     entryList[num].place(x=a*1.8, y=b*(1+num))
     labelList[num].place(x=a*2.8, y=b*(1+num))
@@ -190,7 +255,27 @@ def AddBtn_click():
     delList[num].place(x=a*3.3, y=b*(1+num))    
     print(len(radioList))
     print(num)
+
+
+
+
+
+"""
+#カラー追加ボタンで色を追加　　
+def AddBtn_click():
+    global num
+    num += 1
+    AddColor(color)
     
+    radioList[num].place(x=a,y=b*(1+num))
+    entryList[num].place(x=a*1.8, y=b*(1+num))
+    labelList[num].place(x=a*2.8, y=b*(1+num))
+    
+    Create_delBtn()
+    delList[num].place(x=a*3.3, y=b*(1+num))    
+    print(len(radioList))
+    print(num)
+"""    
 addBtn = tk.Button(ColorHolder, text="Add Color", command=AddBtn_click)           
 addBtn.place(x=a*0.2, y=b*3.5)
 
@@ -198,20 +283,25 @@ print(len(radioList))
 print(num)
 
 
-
-
-
-#プレビュー画面  
-def Preview():
-    canvasPreview = tk.Canvas(width=900, height=450,bg="#000000")
-    canvasPreview.place(x=a, y=b*(2+num))
-    canvasPreview.create_rectangle(0,0,450,450, fill="blue")
-    canvasPreview.create_rectangle(450,0,900,450, fill="yellow")
-    canvasPreview.create_text(450,220,text="Sample", fill= 'red',
+id1=canvas1.create_rectangle(a,b*(2+num),a+450,b*(2+num)+450, fill=entryList[1].get())
+id2=canvas1.create_rectangle(a+450,b*(2+num),a+900,b*(2+num)+450, fill=entryList[2].get())
+id0=canvas1.create_text(a+450,b*(2+num)+220,text="Sample", fill= entryList[0].get(),
                      font=("MSゴシック", "80", "bold"))
 
+"""
+#プレビュー画面(ホーム画面canvas1に追加する)  
+def Preview():
+    id1=canvas1.create_rectangle(a,b*(2+num),a+450,b*(2+num)+450, fill=entryList[1].get())
+    id2=canvas1.create_rectangle(a+450,b*(2+num),a+900,b*(2+num)+450, fill=entryList[2].get())
+    id0=canvas1.create_text(a+450,b*(2+num)+220,text="Sample", fill= entryList[0].get(),
+                     font=("MSゴシック", "80", "bold"))
+    #canvas1.itemconfigure(id0,fill = "red")
 #entryList[3].
 Preview()
+"""
+#canvas1.itemconfigure(id0,fill = "orange")
+canvas1.itemconfigure(id1,fill = "red")
+
     
 ColorHolder.mainloop()
 
