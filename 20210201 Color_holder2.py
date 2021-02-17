@@ -102,11 +102,34 @@ for num in range (3):
     AddColor(colorList[num])
     radioList[num].place(x=a,y=b*(1+num))
     entryList[num].place(x=a*1.8, y=b*(1+num))
+    entryList[num].insert(1,colorList[num])
     labelList[num].place(x=a*2.8, y=b*(1+num))
 
 
-#指定された3色をカラーフォルダに表示する
+#エンターキーを押したときに実行する処理
+#       処理①ラベル3個の色をEntに入力されたカラーコードに変更する。
+#       処理②プレビュー画面２つの色をEntに入力されたカラーコードに変更する。
+#       処理③例外処理
 
+"""
+def colorChange(event):
+    try:
+        labelList[inIndex].config(bg= entryList[inIndex].get())
+    except tkinter.TclError:
+        error=0
+        
+
+
+
+#☆②イベントの処理の設定
+#    エンターキーが押されたときにラベルの色を変更
+
+#入力されたエントリーボックスのインデックス「inIndex」を探す
+
+print(entryList[inIndex])
+entryList[inIndex].bind("<Return>",colorChange) 
+    
+"""
 
 
     
