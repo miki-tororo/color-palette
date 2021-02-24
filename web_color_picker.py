@@ -39,6 +39,11 @@ tkinterをインポートする➡GUIを作成するため
 import tkinter as tk
 
 
+#GUI左上のアイコンの変更
+iconfile = 'iro.ico'
+    
+
+
 """山田さん側で作成してくれる、選択済みカラーを受け取る関数
 def addcolor(color):
         label=tk.Label(bg=color)
@@ -82,6 +87,8 @@ def btn_click():
 
 #ウィンドウの基礎を作る(ウィンドウのオブジェクトを生成）
 root = tk.Tk()
+#左上アイコンの配置
+root.iconbitmap(default=iconfile)
 
 v_size=round(len(list3)/11*100)
 
