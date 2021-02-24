@@ -20,19 +20,10 @@ def release_action(event):
     pyperclip.copy(event.widget["bg"])
     click_paste()
 
+root=tk.Tk()
+
+root.mainloop()
+
 
 #ag.PAUSE=1
 
-
-
-
-root = tk.Tk()
-root.title("GUI-test")
-root.geometry("400x200")
-
-lbl1=tk.Label(text="このラベルの色がドラック＆ドロップで転記されます",bg="#aaaaaa")
-lbl1.pack()
-lbl1.bind("<ButtonRelease>",release_action)
-
-
-root.mainloop()

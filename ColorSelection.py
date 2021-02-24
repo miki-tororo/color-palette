@@ -3,7 +3,11 @@ import pyautogui as ag
 import pyperclip
 import functools
 from ColorClass import Color   #自作クラスのインポート
+import Color_holder
 
+def submit():
+    print(txt1.get())
+    Color_holder.AddColor(txt1.get())
 
 #カラーコード読み取り・反映関数
 def colorGet():
@@ -105,11 +109,10 @@ cx = (fw1 / 2) - (bh * 7)     #緑ラベルの位置座標変数(x軸)
 ex = (wx + ww * 7) - (bh * 14)  #青、黒ラベルの位置座標変数(x軸)
 sh = (wy + wh * 14) - (bh * 7)  #白、黒ラベルの位置座標変数(y軸)
 
-
-
+    
 #メインウィンドウ作成
-root = tk.Tk()
-root.geometry('820x600')
+root = tk.Toplevel()
+root.geometry('1500x600')
 root.title('Color_selection')
 
 #フレーム作成
@@ -149,7 +152,7 @@ txt1.place(x=tx, y=ty)
 
 
 #カラーコード送信ボタン(カラーホルダーへ)
-btn = tk.Button(base1_4, text="送信")
+btn = tk.Button(base1_4, text="送信",command=submit)
 btn.place(x=btx, y=bty)
 
 
@@ -207,4 +210,3 @@ kuro.bind("<ButtonRelease>", functools.partial(setTrigger, params=0, paramr=0, p
 colorGet()
 
 
-root.mainloop()
