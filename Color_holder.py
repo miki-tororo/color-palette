@@ -20,6 +20,7 @@ color="#ffffff"                 #色指定の変数
 entryList=[]
 labelList=[]
 delList=[]
+changeEntryList=[]
 
 #font
 my_font = font.Font(family="游ゴシック",size=10,weight="bold")
@@ -53,37 +54,72 @@ def transition_button2(home):
        
 
 #エンターキーを押したときに実行する処理
-#       処理①ラベル3個の色をEntに入力されたカラーコードに変更する。
-#       処理②プレビュー画面２つの色をEntに入力されたカラーコードに変更する。
-#       処理③例外処理
-
-#変数i:エンターキーが押されたエントリーボックスのインデックス番号
-
-def colorChange(event):
-
-    #event.widget=entryList[i]
-    #print(i) 
-    
+#ラベルの色を変更する
+def colorChange(event): 
 
     #エンターキーが押されたエントリーボックスを探す
     for i in range(len(labelList)):             
         if event.widget==entryList[i]:
             
-            print(i)    
-    
             try:
                 labelList[i].config(bg= entryList[i].get())
-                #canvas1.configureitem(id0,fg = entryList[i].get())
+                        
+            except tk.TclError:
+                error=0
+                
+#プレビューの色をボタンが押されたら変更する
+def ChangeColor1():    
+    try:
+        canvas1.itemconfigure(id0,fill=changeEntryList[0].get())
+
+    except tk.TclError:
+        error=0
+                
+
+def ChangeColor2():
+    
+    try:
+        canvas1.itemconfigure(id1,fill= changeEntryList[2].get())
+
+    except tk.TclError:
+        error=0
+
+def ChangeColor3():
+    
+    try:
+        canvas1.itemconfigure(id2,fill= changeEntryList[3].get())
+
+    except tk.TclError:
+        error=0
         
-                #canvas1.configure(id1,fg = entryList[i+1].get())
+#プレビューの色をボタンがエンター押されたら変更する
+def InsertColor4(event):
+    for i in range(3):             
+        if event.widget==changeEntryList[0]:     
+            try:
+               canvas1.itemconfigure(id0,fill = changeEntryList[0].get())
+    
+            except tk.TclError:
+                error=0
+
+        if event.widget==changeEntryList[1]:     
+            try:
+               canvas1.itemconfigure(id1,fill = changeEntryList[1].get())
         
             except tk.TclError:
                 error=0
+                
+        if event.widget==changeEntryList[2]:     
+            try:
+               canvas1.itemconfigure(id2,fill = changeEntryList[2].get())
+        
+            except tk.TclError:
+                error=0
+                
 
 #カラー1色を追加するメソッド
 def AddColor(color):         #カラーホルダーの生成（①ラジオボタン、②エントリーボックス、③ラベル）
 
- 
     #ラジオボタンをつくる
     #radio =tk.Radiobutton(ColorHolder,font=my_font, value=int(len(radioList)), variable=var)    
     #radioList.append(radio)
@@ -105,34 +141,11 @@ def AddColor(color):         #カラーホルダーの生成（①ラジオボ�
     delList.append(delBtn)
 
     Update_create()
-    
+
+
+#カラーホルダー生成    
 def CreateHoler():
     AddColor("#ffffff")
-
-
-"""
-#☆②イベントの処理の設定
-#    エンターキーが押されたときにラベルの色を変更
-
-#入力されたエントリーボックスのインデックス「i」を探す
-i=0 #仮に設定　event？.entryで設定する
-
-for index in range (num):
-    if entryList[i].get() != entryList[index].get():
-        print(index)
-        i=index
-        print(entryList[i].get())
-        entryList[i].bind("<Return>",colorChange)
-        print("ラベルの色変更")
-
-    else:
-        print(index)
-        print(entryList[index].get())
-        print("変更なし")
-"""
-
-
-
     
 
 #削除ボタンの処理
@@ -166,8 +179,6 @@ def Update_create():
 canvas1=tk.Canvas(width=500,height=300,bg="#000")          
 canvas1.place(x=a*4.5, y=1.2*b)
 
-#AddCollor部分のウェジェットを
-
 
 #ホーム画面のボタン
 selectionBtn = tk.Button(ColorHolder, text="Selection Color",
@@ -184,21 +195,49 @@ WebEntry.insert(0,"http://www.shido.info/py/tkinter2.html")         #エント�
 WebEntry.place(x=a*4.5, y=9*b)
 
 
+#プレビューの色の変更ボタン
+changeBtn1=tk.Button(ColorHolder, text="Color1", command=ChangeColor1)
+changeBtn1.place(x=a*4.5, y=0.6*b)
+
+
+changeBtn2=tk.Button(ColorHolder, text="Color2", command=ChangeColor2)
+changeBtn2.place(x=a*6, y=0.6*b)
+
+
+changeBtn3=tk.Button(ColorHolder, text="Color3", command=ChangeColor3)
+changeBtn3.place(x=a*7.5, y=0.6*b)
+
+
+#プレビューのエントリーボックス
+changeEntry1=tk.Entry(width=13)
+changeEntryList.append(changeEntry1)
+changeEntryList[0].insert(0,"blue")
+changeEntryList[0].place(x=a*4.5, y=0.9*b)
+changeEntry1.bind("<Return>",InsertColor4)
+
+changeEntry2=tk.Entry(width=13)
+changeEntryList.append(changeEntry2)
+changeEntryList[1].insert(0,"yellow")
+changeEntryList[1].place(x=a*6, y=0.9*b)
+changeEntry2.bind("<Return>",InsertColor4)
+
+changeEntry3=tk.Entry(width=13)
+changeEntryList.append(changeEntry3)
+changeEntryList[2].insert(0,"red")
+changeEntryList[2].place(x=a*7.5, y=0.9*b)
+changeEntry3.bind("<Return>",InsertColor4)
+
 
 #カラーを追加するボタンの設定
 addBtn = tk.Button(ColorHolder, text="Add Color", command=CreateHoler)           
 addBtn.place(x=a*4.5, y=b*0.2)
+
 
 #プレビュー画面(ホーム画面canvas1に追加する)
 id0=canvas1.create_rectangle(0,0,250,300, fill="blue")
 id1=canvas1.create_rectangle(250,0,500,300, fill="yellow")
 id2=canvas1.create_text(250,150,text="Sample", fill= "red",
                      font=("MSゴシック", "40", "bold"))
-
-
-#canvas1.itemconfigure(id0,fill = "orange")
-#canvas1.itemconfigure(id1,fill = "red")
-
 
     
 ColorHolder.mainloop()
