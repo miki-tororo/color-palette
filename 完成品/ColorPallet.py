@@ -11,9 +11,10 @@ ColorHolder = tk.Tk()
 ColorHolder.title("Color_holder")
 ColorHolder.geometry("1000x750")
 ColorHolder.iconbitmap(default=iconfile)
+ColorHolder.configure(bg='oldlace')
 
 x0=10
-y0=0
+y0=20
 a=100                           #位置の変数a、bと初期値
 b=70
 
@@ -45,13 +46,12 @@ def release_action(event):
     click_paste()
 
 def click_paste():
-        
     #マウスをドロップした場所のポジションを取得
     x, y = ag.position()
     #マウスをドロップした場所をクリックさせる
     ag.click(x, y, clicks=1)
     #テキストボックス内の全消去(コード入力時に使用する場合は要コメントアウト)
-    ag.hotkey("ctrl", "a", "del")
+    #ag.hotkey("ctrl", "a", "del")
     #カラーコードのペースト
     ag.hotkey("ctrl", "v")
 
@@ -256,8 +256,8 @@ def transition_button2(home):
 
         #メソッド実行結果の出力
     #メソッドは戻り値に置き換わる➡の引数は与えるもの、戻り値は、結果に置き換わるprintの結果
-    list1=color.color_pick("https://en-hyouban.com/company/10200093320/")
-    #list1=color.color_pick("https://www.nagoyajo.city.nagoya.jp/")
+    #list1=color.color_pick("https://en-hyouban.com/company/10200093320/")
+    list1=color.color_pick(WebEntry.get())
     
     #抽出済み全カラーナンバーの重複を削除
     list2=set(list1)
@@ -342,10 +342,8 @@ def transition_button2(home):
             #すべての要素を削除: clear()
             slected_colors.clear()
             
-            
             #今何周目かのカウント
             cnt=0
-      
 
             """
             色番号のチェックボックスにチェックが入っているものを探す
@@ -459,11 +457,6 @@ def colorChange(event):
 
 #カラー1色を追加するメソッド
 def AddColor(color):         #カラーホルダーの生成（①ラジオボタン、②エントリーボックス、③ラベル）
-
- 
-    #ラジオボタンをつくる
-    #radio =tk.Radiobutton(ColorHolder,font=my_font, value=int(len(radioList)), variable=var)    
-    #radioList.append(radio)
        
     #エントリーボックス
     entry = tk.Entry(ColorHolder,font=my_font,width = 13,background = '#ffffff',foreground = '#000000')
@@ -546,8 +539,8 @@ def Update_create():
         #各位置再設定　(ラジオ、エントリー、ラベル、削除ボタン)
         #radioList[i].place(x=x0,y=b*(i+1))
         labelList[i].place(x=x0, y=y0+b*(i))
-        entryList[i].place(x=x0+0.7*a, y=y0+b*(i)+15)
-        delList[i].place(x=x0+a*2.7, y=y0+b*(i))
+        entryList[i].place(x=x0+0.5*a, y=y0+b*(i)+10)
+        delList[i].place(x=x0+a*1.5, y=y0+b*(i)+8)
         print(i)
 
 
@@ -569,14 +562,14 @@ webBtn = tk.Button(ColorHolder, text="Web Color Picker",
 webBtn.place(x=a*4.5, y=8*b)
 
 WebEntry = tk.Entry(width = 35)                                     #URL入力エントリーボックス
-WebEntry.insert(0,"http://www.shido.info/py/tkinter2.html")         #エントリーボックスの初期値設定
+WebEntry.insert(0,"https://honnyomu.hateblo.jp/")         #エントリーボックスの初期値設定
 WebEntry.place(x=a*4.5, y=9*b)
 
 
 
 #カラーを追加するボタンの設定
-#addBtn = tk.Button(ColorHolder, text="Add Color", command=CreateHoler)           
-addBtn = tk.Button(ColorHolder, text="Add Color", command=allDelete)           
+addBtn = tk.Button(ColorHolder, text="Add Color", command=CreateHoler)           
+#addBtn = tk.Button(ColorHolder, text="Add Color", command=allDelete)           
 
 addBtn.place(x=a*4.5, y=b*0.2)
 
