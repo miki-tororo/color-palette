@@ -3,11 +3,11 @@ import pyautogui as ag
 import pyperclip
 import functools
 from ColorClass import Color   #自作クラスのインポート
-import Color_holder
+from Color_holder import AddColor
 
 def submit():
     print(txt1.get())
-    Color_holder.AddColor(txt1.get())
+    AddColor(txt1.get())
 
 #カラーコード読み取り・反映関数
 def colorGet():
@@ -109,7 +109,7 @@ cx = (fw1 / 2) - (bh * 7)     #緑ラベルの位置座標変数(x軸)
 ex = (wx + ww * 7) - (bh * 14)  #青、黒ラベルの位置座標変数(x軸)
 sh = (wy + wh * 14) - (bh * 7)  #白、黒ラベルの位置座標変数(y軸)
 
-    
+
 #メインウィンドウ作成
 root = tk.Toplevel()
 root.geometry('1500x600')
