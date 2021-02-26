@@ -4,6 +4,9 @@ import pyperclip
 import tkinter as tk
 import tkinter.font as font
 
+from ColorClass import Color   #自作クラスのインポート
+
+
 #GUI左上のアイコンの変更
 iconfile = 'iro.ico'
 
@@ -29,15 +32,7 @@ delList=[]
 #font
 my_font = font.Font(family="游ゴシック",size=10,weight="bold")
 
-#微調整実行関数
-def adjustColor():
-    global switch, cc, r, g, b
-    code = Color(txt1.get())        #自作のクラスColorのインスタンスを生成
-    cc = code.adjustColor(r, g, b)  #Colorクラスのメソッドを使用
-    changeColor()
-    #トリガー変数switch==1の間0.05秒ごとにadjustColor()を再読み込み
-    if switch == 1:
-        root.after(50, adjustColor)
+
 
 
 #コピー＆ペースト関数
@@ -60,6 +55,7 @@ def transition_button1(home):
     #####
     ###for ColorSelection
     #####
+    
     import functools
     from ColorClass import Color   #自作クラスのインポート
 
@@ -67,6 +63,16 @@ def transition_button1(home):
     def submit():
         print(txt1.get())
         AddColor(txt1.get())
+
+    #微調整実行関数
+    def adjustColor():
+        global switch, cc, r, g, b
+        code = Color(txt1.get())        #自作のクラスColorのインスタンスを生成
+        cc = code.adjustColor(r, g, b)  #Colorクラスのメソッドを使用
+        changeColor()
+        #トリガー変数switch==1の間0.05秒ごとにadjustColor()を再読み込み
+        if switch == 1:
+            root.after(50, adjustColor)
 
     #カラーコード読み取り・反映関数
     def colorGet():
